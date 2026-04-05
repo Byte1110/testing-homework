@@ -128,6 +128,7 @@ class BlogApiHomeworkTest extends BaseAuthorizedApiTest {
 
     class MyClass {
         private MyClass() {
+            //тест
         }
     }
 }
