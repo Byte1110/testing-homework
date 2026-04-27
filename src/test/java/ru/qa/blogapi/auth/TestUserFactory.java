@@ -1,7 +1,9 @@
 package ru.qa.blogapi.auth;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import ru.qa.blogapi.models.UserRegistrationRequest;
+
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class TestUserFactory {
 
@@ -9,7 +11,7 @@ public final class TestUserFactory {
     }
 
     public static UserRegistrationRequest validUser() {
-        String suffix = RandomStringUtils.secure().nextAlphanumeric(8).toLowerCase();
+        String suffix = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
         return new UserRegistrationRequest(
                 "student_" + suffix + "@example.com",
                 "SecurePass123!",
@@ -17,7 +19,7 @@ public final class TestUserFactory {
                 "Api",
                 "student_" + suffix,
                 "1990-01-02",
-                "+7987" + RandomStringUtils.secure().nextNumeric(7)
+                "+7987" + ThreadLocalRandom.current().nextLong(1_000_000L, 10_000_000L)
         );
     }
 }

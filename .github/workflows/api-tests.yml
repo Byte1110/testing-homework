@@ -1,4 +1,4 @@
-name: API tests
+name: Blog tests
 
 on:
   push:
@@ -7,8 +7,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  api-tests:
+  tests:
     runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        tag:
+          - smoke
+          - regression
+          - e2e
 
     steps:
       - name: Checkout repo
@@ -20,7 +27,5 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Run tests
-        env:
-          BASE_URL: http://localhost:3000
-        run: mvn clean test
+      - name: Run ${{ matrix.tag }} tests
+        run: mvn clean test -Dgroups=${{ matrix.tag }} -Dbase.url=http://localhost:3000 -Dheadless=true

@@ -13,7 +13,7 @@ public abstract class BaseApiTest {
 
     @BeforeAll
     static void beforeAll() {
-        RestAssured.baseURI = TestConfig.baseUrl();
+        RestAssured.baseURI = TestConfig.apiBaseUrl();
 
         requestSpec = new RequestSpecBuilder()
                 .setBaseUri(RestAssured.baseURI)

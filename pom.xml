@@ -14,6 +14,11 @@
         <restassured.version>5.5.1</restassured.version>
         <junit.version>5.12.2</junit.version>
         <jackson.version>2.18.3</jackson.version>
+        <groups></groups>
+        <base.url>http://localhost:3000</base.url>
+        <api.base.url>${base.url}</api.base.url>
+        <ui.base.url>${base.url}</ui.base.url>
+        <headless>true</headless>
     </properties>
 
     <dependencies>
@@ -41,6 +46,12 @@
             <version>3.17.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.31.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -51,6 +62,13 @@
                 <version>3.5.2</version>
                 <configuration>
                     <useSystemClassLoader>true</useSystemClassLoader>
+                    <groups>${groups}</groups>
+                    <systemPropertyVariables>
+                        <base.url>${base.url}</base.url>
+                        <api.base.url>${api.base.url}</api.base.url>
+                        <ui.base.url>${ui.base.url}</ui.base.url>
+                        <headless>${headless}</headless>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
